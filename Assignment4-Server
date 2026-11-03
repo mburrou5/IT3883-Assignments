@@ -1,0 +1,40 @@
+
+# Program Name: Assignment4.py
+# Course: IT3883/Section 01
+# Student Name: Michael Burrough
+# Assignment Number: Lab4
+
+# Purpose: Program will act as a server and displays string recieved from user in uppercase
+# Resources: Python Networking resources on D2L, https://medium.com/@aman.deep291098/network-programming-made-simple-with-python-a0b389a07245
+
+
+
+
+
+
+
+
+import socket
+
+s = socket.socket(
+    socket.AF_INET,
+    socket.SOCK_STREAM
+)
+
+s.bind(("127.0.0.1", 25566))
+s.listen()
+
+
+
+
+
+
+conn, addr = s.accept()
+with conn:
+    while True:
+        data = conn.recv(1024)
+        if not data:
+            break
+
+        uppercase_data = data.decode('utf-8').upper()
+        conn.sendall(uppercase_data.encode('utf-8'))
