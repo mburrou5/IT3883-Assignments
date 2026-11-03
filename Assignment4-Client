@@ -1,0 +1,31 @@
+# Program Name: Assignment4.py
+# Course: IT3883/Section 01
+# Student Name: Michael Burrough
+# Assignment Number: Lab4
+
+# Purpose: Program will act as a client and send string user inputs to seperate program
+# Resources: Python Networking resources on D2L, https://medium.com/@aman.deep291098/network-programming-made-simple-with-python-a0b389a07245
+
+
+
+
+import socket
+
+s = socket.socket(
+    socket.AF_INET,
+    socket.SOCK_STREAM
+)
+
+s.connect(("127.0.0.1", 25566))
+
+
+message = input("Type a string : ")
+
+byte_array = message.encode('utf-8')
+s.sendall(byte_array)
+
+data = s.recv(1024)
+
+print("Received:", data.decode('utf-8'))
+
+print(s.recv(256).decode('utf-8'))
